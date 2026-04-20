@@ -25,6 +25,28 @@
  * @param {number} income - Annual income in dollars
  * @returns {number} Total tax amount owed
  */
-export function calculateTax(income) {
-  // Your code here
+export function calculateTax(income) {  
+  if (typeof income !== 'number' || income <= 0) {
+    return 0; // No tax for zero or negative income
+  }
+
+  let tax = 0;
+
+  if (income > 70000) {
+    tax += (income - 70000) * 0.30; // Tax for bracket 4
+    income = 70000; // Reduce income to the top of bracket 3
+  }
+
+  if (income > 30000) {
+    tax += (income - 30000) * 0.20; // Tax for bracket 3
+    income = 30000; // Reduce income to the top of bracket 2
+  }
+
+  if (income > 10000) {
+    tax += (income - 10000) * 0.10; // Tax for bracket 2
+    // No need to reduce income further since bracket 1 is tax-free
+  }
+
+  return tax;
+
 }

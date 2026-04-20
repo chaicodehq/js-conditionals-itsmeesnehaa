@@ -31,5 +31,48 @@
  * @returns {number} Total price or -1 for invalid input
  */
 export function calculateCoffeePrice(size, type, extras = {}) {
-  // Your code here
+  let basePrice;
+
+  // Determine base price based on size
+  if (size === "small") {
+    basePrice = 3.00;
+  } else if (size === "medium") {
+    basePrice = 4.00;
+  } else if (size === "large") {
+    basePrice = 5.00;
+  } else {
+    return -1; // Invalid size
+  }
+
+  let typePrice;
+
+  // Determine add-on price based on coffee type
+  if (type === "regular") {
+    typePrice = 0.00;
+  } else if (type === "latte") {
+    typePrice = 1.00;
+  } else if (type === "cappuccino") {
+    typePrice = 1.50;
+  } else if (type === "mocha") {
+    typePrice = 2.00;
+  } else {
+    return -1; // Invalid coffee type
+  }
+
+  let extraPrice = 0;
+
+  // Calculate extra price based on options
+  if (extras.whippedCream) {
+    extraPrice += 0.50;
+  }
+  if (extras.extraShot) {
+    extraPrice += 0.75;
+  }
+
+  // Calculate total price
+  const totalPrice = basePrice + typePrice + extraPrice;
+
+  // Return total price rounded to 2 decimal places
+  return Math.round(totalPrice * 100) / 100;
+
 }
